@@ -13,16 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GCSNotificationCenter : NSObject
 
-
 @property (class, readonly, strong) GCSNotificationCenter *defaultCenter;
 
 - (void)gcs_addObserver:(id)observer selector:(SEL)aSelector name:(nullable NSString *)aName object:(nullable id)anObject;
 
-- (void)gcs_postNotificationName:(NSNotificationName)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;
+- (void)gcs_postNotificationName:(NSString *)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo;
 
 - (void)removeObserver:(id)observer;
-
-
 
 
 @end

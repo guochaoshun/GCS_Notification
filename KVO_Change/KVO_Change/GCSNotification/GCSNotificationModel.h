@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,weak) id target ;
 @property (nonatomic,assign) SEL sel ;
+/// 只接受这个notiObject的通知, 为nil说明监听所有的通知
 @property (nonatomic,weak) id notiObject ;
 
 @end

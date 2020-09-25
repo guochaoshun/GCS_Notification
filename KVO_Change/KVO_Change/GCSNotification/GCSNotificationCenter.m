@@ -31,11 +31,14 @@
 
 - (void)gcs_addObserver:(id)observer selector:(SEL)aSelector name:(NSString *)aName object:(nullable id)anObject {
     
+    if (aName == nil || observer == nil) return;
+    
     GCSNotificationModel * model = [[GCSNotificationModel alloc] init];
     model.target = observer;
     model.sel = aSelector;
     model.notiObject = anObject;
     
+    // 用数组保存同一个aName所有监听者
     NSMutableArray * nameArray = [self.dataDic objectForKey:aName] ;
     if (nameArray == nil) {
         nameArray = [NSMutableArray array];
@@ -49,20 +52,29 @@
 }
 
 - (void)gcs_postNotificationName:(NSNotificationName)aName object:(nullable id)anObject userInfo:(nullable NSDictionary *)aUserInfo {
+    
+    NSMutableArray * nameArray = [self.dataDic objectForKey:aName] ;
+    if (nameArray == nil) {
+        NSLog(@"%@没有监听者",aName);
+        return;
+    }
+    
     GCSNotification * noti = [[GCSNotification alloc] init];
     noti.name = aName;
     noti.senderObject = anObject;
-    noti.userInfo = aUserInfo;
+    noti.userInfo = [aUserInfo copy];
     
-    NSMutableArray * nameArray = [self.dataDic objectForKey:aName] ;
     for (GCSNotificationModel * model in nameArray) {
         
-        if (model.notiObject == nil || [model.notiObject isEqual:noti.senderObject]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [model.target performSelector:model.sel withObject:noti];
-#pragma clang diagnostic pop
-
+        // 说明是给所有的监听者发送
+        if (anObject == nil) {
+            [self __sendActionOnMainThread:model noti:noti];
+            continue;
+        }
+        
+        // anObject存在, 说明是要给特定的监听者发送
+        if ([model.notiObject isEqual:noti.senderObject]) {
+            [self __sendActionOnMainThread:model noti:noti];
         }
         
     }
@@ -70,20 +82,44 @@
     
 }
 
+- (void)__sendActionOnMainThread:(GCSNotificationModel *)notiModel noti:(GCSNotification *)noti {
+
+    // 不支持此方法,
+    if ([notiModel.target respondsToSelector:notiModel.sel] == NO) {
+        NSLog(@"%@不支持此方法%@",notiModel.target,NSStringFromSelector(notiModel.sel) );
+        return;
+    }
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
+    if ([NSThread isMainThread]) {
+        [notiModel.target performSelector:notiModel.sel withObject:noti];
+    } else {
+        [notiModel.target performSelectorOnMainThread:notiModel.sel withObject:noti waitUntilDone:YES];
+    }
+    
+#pragma clang diagnostic pop
+
+    
+}
+
+
 - (void)removeObserver:(id)observer {
     
-    for (int i = (int)self.dataDic.count-1; i>=0; i--) {
-        NSString * key = self.dataDic.allKeys[i];
-        NSMutableArray * nameArray = [self.dataDic objectForKey:key] ;
-        for (int j = (int)nameArray.count-1; j>=0; j--) {
-            GCSNotificationModel * model = nameArray[j];
-            if ([model.target isEqual:observer] || model.target == nil) {
-                [nameArray removeObject:model];
-            }
-            
-        }
+    for (NSString * key in self.dataDic) {
         
-        if (nameArray.count == 0) {
+        NSMutableArray * array = self.dataDic[key] ;
+        NSMutableArray * delArray = [NSMutableArray array];
+        for (GCSNotificationModel * model in array) {
+            
+            if (model.target == observer || model.target == nil) {
+                [delArray addObject:model];
+                continue;
+            }
+        }
+        [array removeObjectsInArray:delArray];
+        if (array.count == 0) {
             [self.dataDic removeObjectForKey:key];
         }
         

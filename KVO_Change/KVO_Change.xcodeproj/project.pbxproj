@@ -15,8 +15,6 @@
 		9C5ED3DA22C4D45B0022D826 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5ED3D922C4D45B0022D826 /* main.m */; };
 		9C5ED3E422C4D45B0022D826 /* KVO_ChangeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5ED3E322C4D45B0022D826 /* KVO_ChangeTests.m */; };
 		9C5ED3EF22C4D45B0022D826 /* KVO_ChangeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5ED3EE22C4D45B0022D826 /* KVO_ChangeUITests.m */; };
-		9C5ED3FE22C4D4810022D826 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5ED3FD22C4D4810022D826 /* SecondViewController.m */; };
-		9C5ED40122C4D4940022D826 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5ED40022C4D4940022D826 /* Person.m */; };
 		9C5ED40422C5BC980022D826 /* GCSNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5ED40322C5BC980022D826 /* GCSNotificationCenter.m */; };
 		9C8055F522C5BE1B002951A6 /* GCSNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8055F422C5BE1B002951A6 /* GCSNotification.m */; };
 		9C8055F822C5BE45002951A6 /* GCSNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8055F722C5BE45002951A6 /* GCSNotificationModel.m */; };
@@ -56,10 +54,6 @@
 		9C5ED3EA22C4D45B0022D826 /* KVO_ChangeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KVO_ChangeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C5ED3EE22C4D45B0022D826 /* KVO_ChangeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVO_ChangeUITests.m; sourceTree = "<group>"; };
 		9C5ED3F022C4D45B0022D826 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9C5ED3FC22C4D4810022D826 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		9C5ED3FD22C4D4810022D826 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		9C5ED3FF22C4D4940022D826 /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		9C5ED40022C4D4940022D826 /* Person.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		9C5ED40222C5BC980022D826 /* GCSNotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCSNotificationCenter.h; sourceTree = "<group>"; };
 		9C5ED40322C5BC980022D826 /* GCSNotificationCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCSNotificationCenter.m; sourceTree = "<group>"; };
 		9C8055F322C5BE1B002951A6 /* GCSNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCSNotification.h; sourceTree = "<group>"; };
@@ -120,11 +114,7 @@
 				9C5ED3CB22C4D44E0022D826 /* AppDelegate.m */,
 				9C5ED3CD22C4D44E0022D826 /* ViewController.h */,
 				9C5ED3CE22C4D44E0022D826 /* ViewController.m */,
-				9C5ED3FC22C4D4810022D826 /* SecondViewController.h */,
-				9C5ED3FD22C4D4810022D826 /* SecondViewController.m */,
 				9C8055F222C5BE02002951A6 /* GCSNotification */,
-				9C5ED3FF22C4D4940022D826 /* Person.h */,
-				9C5ED40022C4D4940022D826 /* Person.m */,
 				9C5ED3D022C4D44E0022D826 /* Main.storyboard */,
 				9C5ED3D322C4D45B0022D826 /* Assets.xcassets */,
 				9C5ED3D522C4D45B0022D826 /* LaunchScreen.storyboard */,
@@ -295,9 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C5ED3FE22C4D4810022D826 /* SecondViewController.m in Sources */,
 				9C5ED3CF22C4D44E0022D826 /* ViewController.m in Sources */,
-				9C5ED40122C4D4940022D826 /* Person.m in Sources */,
 				9C5ED3DA22C4D45B0022D826 /* main.m in Sources */,
 				9C5ED3CC22C4D44E0022D826 /* AppDelegate.m in Sources */,
 				9C8055F522C5BE1B002951A6 /* GCSNotification.m in Sources */,
